@@ -21,7 +21,8 @@ class HBNBCommand(cmd.Cmd):
     HBNBCommand console
     """
     prompt = "(hbnb)"
-    classes = ["BaseModel", "State", "Place", "Amenity", "City", "Review", "User"]
+    classes = ["BaseModel", "State", "Place", "Amenity",
+                "City", "Review", "User"]
 
     def do_help(self, arg):
         return super().do_help(arg)
@@ -45,7 +46,8 @@ class HBNBCommand(cmd.Cmd):
         return True
     def do_create(self, arg):
         """
-        
+        Create a new instance of BaseModel and save it to the JSON file.
+        Usage: create <class_name>
         """
         cmd = arg.split()
         if len(cmd) == 0:
@@ -59,7 +61,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, arg):
         """
-        
+         Prints the string representation of an instance based on the class name and id
         """
         cmd = arg.split()
         if len(arg) == 0:
@@ -78,7 +80,8 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
     def do_all(self,arg):
         """
-        
+        Print the string representation of all instances or a specific class.
+        Usage: <User>.all()
         """
         cmnd =arg.split()
         objs = storage.all()
@@ -94,7 +97,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         """
-        
+        Delete an instance using on the class name and id as arg.
+        Usage: destroy <class_name> <id>
         """
         objs = storage.all()
         cmnd = arg.split()
@@ -115,7 +119,8 @@ class HBNBCommand(cmd.Cmd):
                 
     def do_update(self,arg):
         """
-        
+        Update an instance by adding or changing an attribute.
+        Usage: update <class_name> <id> <attribute_name> "<attribute_value>"
         """
         objs = storage.all()
         cmnd = arg.split()
@@ -165,7 +170,7 @@ class HBNBCommand(cmd.Cmd):
 
     def split_cu_brac(line):
         """
-        Splits the curly braces for the update method
+        Split the curly braces.
         """
         c_brace = re.search(r"\{(.*?)\}", line)
 
@@ -200,6 +205,7 @@ class HBNBCommand(cmd.Cmd):
     
     def default(self, line):
         """
+        Default behavior for cmd
         """
         line_list = line.split('.')
 
