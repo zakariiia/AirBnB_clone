@@ -12,10 +12,6 @@ import shlex
 import re
 import ast
 
-
-
-
-
 class HBNBCommand(cmd.Cmd):
     """
     HBNBCommand console
