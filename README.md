@@ -57,9 +57,7 @@ The project focuses on achieving the following objectives:
 
 - [Examples and Usage](#examples-and-usage)
 - [Installation](#installation)
-- [Documentation](#documentation)
 - [Contributing](#contributing)
--
 -----------
 
 # Examples of Usage
