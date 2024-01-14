@@ -18,7 +18,7 @@ class TestBasemodel(unittest.TestCase):
         Setup for temporary file path
         """
         try:
-            os.rename("file.json", "tmp.json")
+            os.rename("file.json", "file_tmp.json")
         except FileNotFoundError:
             pass
 
@@ -31,28 +31,28 @@ class TestBasemodel(unittest.TestCase):
         except FileNotFoundError:
             pass
         try:
-            os.rename("tmp.json", "file.json")
+            os.rename("file_tmp.json", "file.json")
         except FileNotFoundError:
             pass
     def test_init(self):
         """
         Test for init
         """
-        my_model = BaseModel()
+        mod1 = BaseModel()
 
-        self.assertIsNotNone(my_model.id)
-        self.assertIsNotNone(my_model.created_at)
-        self.assertIsNotNone(my_model.updated_at)
+        self.assertIsNotNone(mod1.id)
+        self.assertIsNotNone(mod1.created_at)
+        self.assertIsNotNone(mod1.updated_at)
 
     def test_save(self):
         """
         Test for save method
         """
-        my_model = BaseModel()
+        mod1 = BaseModel()
 
-        initial_updated_at = my_model.updated_at
+        initial_updated_at = mod1.updated_at
 
-        current_updated_at = my_model.save()
+        current_updated_at = mod1.save()
 
         self.assertNotEqual(initial_updated_at, current_updated_at)
 
@@ -60,29 +60,27 @@ class TestBasemodel(unittest.TestCase):
         """
         Test for to_dict method
         """
-        my_model = BaseModel()
+        mod1 = BaseModel()
 
-        my_model_dict = my_model.to_dict()
+        mod1_dict = mod1.to_dict()
 
-        self.assertIsInstance(my_model_dict, dict)
-
-        self.assertEqual(my_model_dict["__class__"], 'BaseModel')
-        self.assertEqual(my_model_dict['id'], my_model.id)
-        self.assertEqual(my_model_dict['created_at'], my_model.created_at.isoformat())
-        self.assertEqual(my_model_dict["updated_at"], my_model.created_at.isoformat())
+        self.assertIsInstance(mod1_dict, dict)
+        self.assertEqual(mod1_dict["__class__"], 'BaseModel')
+        self.assertEqual(mod1_dict['id'], mod1.id)
+        self.assertEqual(mod1_dict["updated_at"], mod1.created_at.isoformat())
+        self.assertEqual(mod1_dict['created_at'], mod1.created_at.isoformat())
+        
 
 
     def test_str(self):
         """
         Test for string representation
         """
-        my_model = BaseModel()
+        mod1 = BaseModel()
 
-        self.assertTrue(str(my_model).startswith('[BaseModel]'))
-
-        self.assertIn(my_model.id, str(my_model))
-
-        self.assertIn(str(my_model.__dict__), str(my_model))
+        self.assertTrue(str(mod1).startswith('[BaseModel]'))
+        self.assertIn(str(mod1.__dict__), str(mod1))
+        self.assertIn(mod1.id, str(mod1))
 
 
 if __name__ == "__main__":
