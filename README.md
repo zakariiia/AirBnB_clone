@@ -55,9 +55,9 @@ The project focuses on achieving the following objectives:
 
 ## Table of Contents
 
-- [Examples and Usage](#examples-and-usage)
+- [Examples and Usage](#Examples of Usage)
 - [Installation](#installation)
-- [Contributing](#contributing)
+- [Contributing](#Authors)
 -----------
 
 # Examples of Usage
@@ -91,4 +91,4 @@ IMPORTANT: The project was created in Ubuntu 20.04 LTS using python3 (version 3.
 ## Authors
 
 * **BENCHAHYD** - [github](https://github.com/MMMBenchahyd) - [linkedin](https://www.linkedin.com/in/mhammed-benchahyd-aa1198281/) - [X](https://twitter.com/SEMhammedBen)
-* **Zakariia** - [github]()
+* **Zakariia** - [github](https://github.com/zakariiia/)  - [X](https://twitter.com/zakaria_moukrim)
