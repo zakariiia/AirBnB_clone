@@ -55,7 +55,7 @@ The project focuses on achieving the following objectives:
 
 ## Table of Contents
 
-- [Examples and Usage](#Examples of Usage)
+- [Examples and Usage](#Examples-of-Usage)
 - [Installation](#installation)
 - [Contributing](#Authors)
 -----------
