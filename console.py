@@ -10,8 +10,6 @@ from models.review import Review
 from models.state import State
 from models.city import City
 import shlex
-import re
-import ast
 
 
 class HBNBCommand(cmd.Cmd):
@@ -103,10 +101,18 @@ class HBNBCommand(cmd.Cmd):
         """Update."""
         objs = storage.all()
         cmnd = arg.split()
+        try: 
+            cmnd[0] = cmnd[0].split('\'')[1]
+        except Exception:
+            pass
+        try:
+            cmnd[3] = cmnd[3].split('\"')[1]
+        except Exception:
+            pass
         if len(arg) == 0:
             print("** class name missing **")
         elif cmnd[0] not in self.classes:
-            print("** class doesn't exist **")
+            print(f"** class doesn't exist **")
         elif len(cmnd) < 2:
             print("** instance id missing **")
         else:
@@ -121,7 +127,6 @@ class HBNBCommand(cmd.Cmd):
                 obj = objs[key]
                 setattr(obj, cmnd[2], cmnd[3])
                 storage.save()
-                # attrb_name = cmnd[1]
 
     def do_count(self, line):
         """Count and retrieve the number of instances of a class.
@@ -148,37 +153,22 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class name missing **")
 
-    def split_cu_brac(line):
+    def split_cu_brac(self, line):
         """Split the curly braces for the update method."""
-        c_brace = re.search(r"\{(.*?)\}", line)
-
-        if c_brace:
-            id_with_comma = shlex.split(line[:c_brace.span()[0]])
-            id = [i.strip(",") for i in id_with_comma][0]
-
-            string_data = c_brace.group(1)
-            try:
-                line_dict = ast.literal_eval("{" + string_data + "}")
-            except Exception:
-                print("**  invalid dictionary format **")
-                return
-            return id, line_dict
+        list_cmnd = line.split(",")
+        if len(list_cmnd) == 0:
+            print("** instance id missing **")
+        elif len(list_cmnd) < 2:
+            print("** attribute name missing **")
+        elif len(list_cmnd) < 3:
+            print("** value missing **")
         else:
-            cmnd = line.split(",")
-            if cmnd:
-                try:
-                    id = cmnd[0]
-                except Exception:
-                    return "", ""
-                try:
-                    attr_nm = cmnd[1]
-                except Exception:
-                    return id, ""
-                try:
-                    attr_val = cmnd[2]
-                except Exception:
-                    return id, attr_nm
-                return f"{id}", f"{attr_nm} {attr_val}"
+            cls_id = list_cmnd[0]
+            cls_att = list_cmnd[1]
+            cls_value = list_cmnd[2]
+            return f"{cls_id[1:-1]} {cls_att[2:-1]} {cls_value}"
+        
+
 
     def default(self, line):
         """DEf."""
@@ -209,12 +199,12 @@ class HBNBCommand(cmd.Cmd):
                     print("** class name missing **")
                     return
                 try:
-                    obj_id, line_dict = self.split_cu_brac(e_line)
+                    arg_update = self.split_cu_brac(e_line)
                 except Exception:
                     pass
                 try:
-                    execu = cls_dict[cmnd_met]
-                    return execu("{} {} {}".format(cls_nm, obj_id, line_dict))
+                    execu = self.do_update("{} {}".format(cls_nm, arg_update))
+                    return execu
                 except Exception:
                     pass
         else:
