@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """This file manage all required implentation for a simple AirBNB console."""
 import cmd
 from models.base_model import BaseModel
