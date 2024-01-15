@@ -7,7 +7,7 @@ from models.base_model import BaseModel
 
 class User(BaseModel):
     """
-    class User that handles users' information
+    class User - users' information
     """
     email = ""
     password = ""
