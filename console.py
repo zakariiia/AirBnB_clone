@@ -210,7 +210,6 @@ class HBNBCommand(cmd.Cmd):
                     return
                 try:
                     obj_id, line_dict = self.split_cu_brac(e_line)
-                    print(obj_id, line_dict)
                 except Exception:
                     pass
                 try:
