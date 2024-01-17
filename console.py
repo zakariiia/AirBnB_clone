@@ -109,6 +109,7 @@ class HBNBCommand(cmd.Cmd):
             cmnd[3] = cmnd[3].split('\"')[1]
         except Exception:
             pass
+
         if len(arg) == 0:
             print("** class name missing **")
         elif cmnd[0] not in self.classes:
@@ -181,6 +182,13 @@ class HBNBCommand(cmd.Cmd):
         cmnd_met = cmnd[0]
 
         e_line = cmnd[1].split(')')[0]
+        if '{' in e_line:
+            try:
+                spl = e_line.split('{')
+                spl = spl.split('}')
+                e_line = f"{spl[0]} {spl[1]}"
+            except Exception:
+                pass
 
         cls_dict = {
                 'all': self.do_all,
@@ -203,8 +211,7 @@ class HBNBCommand(cmd.Cmd):
                 except Exception:
                     pass
                 try:
-                    execu = self.do_update("{} {}".format(cls_nm, arg_update))
-                    return execu
+                    self.do_update("{} {}".format(cls_nm, arg_update))
                 except Exception:
                     pass
         else:
